@@ -205,6 +205,14 @@ const CONTENT = {
       desc: "Personal environment render in Blender — lighting, shading, and compositing breakdown.",
       link: "",
     },
+    {
+      title: "Alone in Nature",
+      category: "Environment",
+      tags: ["Blender", "Cycles", "Lighting", "Compositing"],
+      video: "", youtube: "ne88I0vntMA", image: "",
+      desc: "An alien crash-lands in a forest and discovers nature for the first time — golden hour meadows, a sunflower, birdsong by the river. Inspired by the hills of Uttarakhand. Made in Blender, composited in After Effects and Nuke.",
+      link: "https://youtu.be/ne88I0vntMA?si=uMRZ_a4XW098IazG",
+    },
     // ── ADD MORE CGI WORK HERE ──
     // {
     //   title: "My New Render",
