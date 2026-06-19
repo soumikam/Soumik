@@ -368,15 +368,15 @@ const CONTENT = {
 
   /* ── CONTACT ──────────────────────────────────────── */
   contact: {
-    email: "soumik@example.com",    // ← replace with your email
+    email: "soumiknptel12@gmail.com",
     links: [
-      { label: "GitHub",    icon: "github",   url: "https://github.com/soumik-adhikary" },
-      { label: "LinkedIn",  icon: "linkedin", url: "https://linkedin.com/in/soumik-adhikary" },
+      { label: "GitHub",    icon: "github",   url: "https://github.com/soumikam" },
+      { label: "LinkedIn",  icon: "linkedin", url: "https://www.linkedin.com/in/soumik-adhikary/" },
       { label: "LeetCode",  icon: "lc",       url: "https://leetcode.com/soumik-adhikary" },
       { label: "NeetCode",  icon: "nc",       url: "https://neetcode.io" },
-      { label: "YouTube",   icon: "yt",       url: "https://youtube.com/@soumik-adhikary" },
+      { label: "YouTube",   icon: "yt",       url: "https://www.youtube.com/@Soumik.Pixels" },
     ],
-    resume: "assets/Soumik_Adhikary_Resume.pdf",   // ← drop your PDF in assets/
+    resume: "https://drive.google.com/file/d/1JyD8mgFRfd2LA5utkmQCTDAJPGP9u6Fq/view?usp=sharing",
   },
 
 };
