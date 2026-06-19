@@ -49,13 +49,13 @@ const CONTENT = {
     {
       id: "toon",
       title: "URP Toon Shader",
-      category: "URP",          // used for filter: URP | VFX | ShaderGraph | HLSL
+      category: "URP",
       tags: ["HLSL", "URP", "MatCap", "ShaderGUI"],
       desc: "Cel shading via MatCap UV lookup. Inverted-hull geometry outline pass. Explicit URP shadow caster. Custom ShaderGUI inspector.",
-      video: "",                // e.g. "assets/video/toon.mp4"
-      poster: "",               // e.g. "assets/img/toon-poster.jpg" (shows before video loads)
-      youtube: "",              // e.g. "dQw4w9WgXcQ" — full breakdown
-      preview: "webgl:toon",    // fallback if no video/image
+      video: "assets/video/toon.mp4",
+      poster: "assets/img/toon-poster.png",
+      youtube: "",
+      preview: "webgl:toon",
       link: "",
       featured: true,
     },
