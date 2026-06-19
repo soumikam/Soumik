@@ -253,6 +253,30 @@ const CONTENT = {
       desc: "A cosmic sphere travels through the tunnels of space and time, vibing to the rhythm of the universe. Music composed in FL Studio; rendered in Blender and composited in After Effects with RedGiant Trapcode and Universe Suite.",
       link: "https://www.youtube.com/watch?v=e6DgLES_Rrk",
     },
+    {
+      title: "Revolutionizing 3D Game Development — EDIIIE",
+      category: "Breakdown",
+      tags: ["Blender", "3D Assets", "Game Trailer", "Animation", "Sound Design"],
+      video: "", youtube: "SBOZ4_ZJctg", image: "",
+      desc: "Promotional cinematic made for EDIIIE — showcasing optimized 3D assets, high-octane game trailers, and AI-powered game development capabilities. Created during my time at the studio.",
+      link: "https://www.youtube.com/watch?v=SBOZ4_ZJctg",
+    },
+    {
+      title: "Behind the Scenes — EDIIIE Game Dev Studio",
+      category: "Breakdown",
+      tags: ["3D Assets", "Modeling", "Texture Mapping", "Animation", "Game Development"],
+      video: "", youtube: "gILlzN24gCE", image: "",
+      desc: "Behind-the-scenes breakdown of EDIIIE's 3D game development pipeline — sculpting, texturing, and animating assets, with a look at the tools and methodologies that keep production moving at speed.",
+      link: "https://www.youtube.com/watch?v=gILlzN24gCE",
+    },
+    {
+      title: "Vulkan Forged — Gameplay Teaser",
+      category: "FX",
+      tags: ["Game Trailer", "3D Animation", "VFX", "Unity", "EDIIIE"],
+      video: "", youtube: "pl_TsD9f0e0", image: "",
+      desc: "Gameplay teaser for Vulkan Forged, produced at EDIIIE. High-octane action sequences, VFX, and cinematic camera work crafted to hook players before launch.",
+      link: "https://www.youtube.com/watch?v=pl_TsD9f0e0",
+    },
     // ── ADD MORE CGI WORK HERE ──
     // {
     //   title: "My New Render",
