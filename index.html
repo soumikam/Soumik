@@ -1087,6 +1087,9 @@ textarea { resize: none; min-height: 110px; }
       <div class="reveal reveal-d3">
         <div class="stack-subtitle">Skills</div>
         <div class="stack-items" id="stackSkills"></div>
+        <div style="display:flex; justify-content:flex-end; margin-top:32px;">
+          <a href="#" target="_blank" class="btn btn-outline" id="stackResumeBtn">↓ Download Resume</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1947,6 +1950,10 @@ function renderAll() {
     renderStack(C.stack.software,  'stackSoftware');
     renderStack(C.stack.languages, 'stackLanguages');
     renderStack(C.stack.skills,    'stackSkills');
+  }
+  if (C.contact && C.contact.resume) {
+    const btn = document.getElementById('stackResumeBtn');
+    if (btn) btn.href = C.contact.resume;
   }
 
   /* ── Marketplace ── */
