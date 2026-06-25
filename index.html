@@ -570,10 +570,15 @@ body::before {
   max-width: 860px; width: 100%;
   max-height: 92vh;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
   background: var(--surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border2);
 }
+.lightbox-inner::-webkit-scrollbar { width: 4px; }
+.lightbox-inner::-webkit-scrollbar-track { background: transparent; }
+.lightbox-inner::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 .lightbox-img { width: 100%; background: #000; }
 .lightbox-body { padding: 20px 28px 28px; }
 .lightbox-close {
