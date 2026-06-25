@@ -470,39 +470,35 @@ body::before {
 .shader-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  gap: 12px;
 }
 .shader-cell {
-  position: relative;
-  aspect-ratio: 4/3;
+  border-radius: var(--radius-md);
   overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.25s, transform 0.25s;
   cursor: pointer;
 }
-.shader-cell.span2 { grid-column: span 2; aspect-ratio: auto; min-height: 320px; }
-.shader-cell canvas,
-.shader-cell img.shader-img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+.shader-cell:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.25); transform: translateY(-3px); }
+.shader-thumb {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  position: relative;
+  background: var(--surface2);
+}
+.shader-thumb video, .shader-thumb img.shader-img, .shader-thumb canvas {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .shader-img-placeholder {
   width: 100%; height: 100%;
-  background: var(--surface2);
   display: flex; align-items: center; justify-content: center;
   font-size: 32px; color: var(--text3);
 }
-.shader-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-  padding: 24px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  opacity: 0; transition: opacity 0.3s;
-}
-.shader-cell:hover .shader-overlay { opacity: 1; }
-.shader-cell-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
-.shader-cell-title { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: #fff; margin-bottom: 6px; }
-.shader-cell-desc  { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.55; margin-bottom: 10px; }
+.shader-body { padding: 14px 16px 16px; }
+.shader-cell-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.shader-cell-title { font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--text); margin-bottom: 5px; }
+.shader-cell-desc  { font-size: 12px; color: var(--text2); line-height: 1.55; margin-bottom: 8px; }
 
 /* ════ TOOLS SECTION ═════════════════════════════════ */
 .tools-grid {
@@ -887,10 +883,43 @@ textarea { resize: none; min-height: 110px; }
   .reveal { opacity: 1 !important; transform: none !important; }
 }
 
+/* ════ VIEW ALL BUTTON ═══════════════════════════════ */
+.view-all-wrap { display: flex; justify-content: center; margin-top: 32px; }
+.btn-view-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 999px;
+  border: 1px solid var(--border2); background: transparent;
+  color: var(--text2); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-view-all:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+/* ════ SECTION FULL VIEW OVERLAY ════════════════════ */
+.section-view {
+  position: fixed; inset: 0; z-index: 450;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+}
+.section-view.open { transform: translateY(0); }
+.sv-header {
+  flex-shrink: 0;
+  padding: 28px 48px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  position: relative;
+}
+.sv-title { font-family: var(--font-serif); font-style: italic; font-size: 26px; color: var(--text); flex-shrink: 0; }
+.sv-body { flex: 1; overflow-y: auto; padding: 32px 48px 64px; }
+.sv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 900px) { .sv-grid { grid-template-columns: 1fr 1fr; } .sv-header { padding: 20px 24px 16px; } .sv-body { padding: 24px 24px 48px; } }
+@media (max-width: 600px) { .sv-grid { grid-template-columns: 1fr; } }
+
 /* ════ RESPONSIVE ════════════════════════════════════ */
 @media (max-width: 1024px) {
   .shader-grid { grid-template-columns: 1fr 1fr; }
-  .shader-cell.span2 { grid-column: span 2; }
   .tools-grid { grid-template-columns: 1fr 1fr; }
   .cgi-grid { grid-template-columns: 1fr 1fr; }
   .blog-grid { grid-template-columns: 1fr 1fr; }
@@ -905,7 +934,6 @@ textarea { resize: none; min-height: 110px; }
   .section { padding: 72px 0; }
   .section-title { font-size: 32px; margin-bottom: 32px; }
   .shader-grid { grid-template-columns: 1fr; }
-  .shader-cell.span2 { grid-column: auto; min-height: 260px; }
   .tools-grid { grid-template-columns: 1fr; }
   .cgi-grid { grid-template-columns: 1fr; }
   .blog-grid { grid-template-columns: 1fr; }
@@ -964,9 +992,22 @@ textarea { resize: none; min-height: 110px; }
       <div class="tl-role" id="lbTitle" style="margin-bottom:8px;"></div>
       <div style="font-size:14px;color:var(--text2);" id="lbDesc"></div>
       <div class="tags-row" style="margin-top:12px;" id="lbTags"></div>
+      <div id="lbLinks" style="margin-top:16px;display:none;flex-wrap:wrap;gap:8px;"></div>
     </div>
   </div>
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+</div>
+
+<!-- ─── SECTION FULL VIEW OVERLAY ───────────────────────── -->
+<div class="section-view" id="sectionView">
+  <div class="sv-header">
+    <div class="sv-title" id="svTitle"></div>
+    <div class="filter-bar" id="svFilters"></div>
+    <button class="lightbox-close" id="svClose" onclick="closeSectionView()">✕</button>
+  </div>
+  <div class="sv-body">
+    <div class="sv-grid" id="svGrid"></div>
+  </div>
 </div>
 
 <!-- ─── NAV ───────────────────────────────────────────── -->
@@ -1521,6 +1562,17 @@ function openLightbox(item) {
   } else {
     imgEl.innerHTML = `<div style="font-size:48px;padding:48px;background:var(--surface2);width:100%;text-align:center;">🎨</div>`;
   }
+  // Links (marketplace, docs, github)
+  const linksEl = document.getElementById('lbLinks');
+  if (item.links && item.links.length) {
+    linksEl.innerHTML = item.links.map(l =>
+      `<a href="${l.url}" target="_blank" class="btn btn-outline" style="font-size:12px;padding:7px 14px;">${l.label} ↗</a>`
+    ).join('');
+    linksEl.style.display = 'flex';
+  } else {
+    linksEl.style.display = 'none';
+  }
+
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1531,7 +1583,97 @@ function closeLightbox(e) {
   // Stop any playing media by clearing the container
   document.getElementById('lightboxImg').innerHTML = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({target:document.getElementById('lightbox')}); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('sectionView').classList.contains('open')) closeSectionView();
+    else closeLightbox({target:document.getElementById('lightbox')});
+  }
+});
+
+/* ═══ SECTION FULL VIEW ═══════════════════════════════ */
+const SV_LIMIT = { shaders: 4, cgi: 6, tools: 6 };
+
+function openSectionView(section) {
+  const D    = CONTENT;
+  const sv   = document.getElementById('sectionView');
+  const grid = document.getElementById('svGrid');
+  const fbar = document.getElementById('svFilters');
+  document.getElementById('svTitle').textContent = { shaders:'All Shaders', cgi:'All CGI & Breakdowns' }[section] || section;
+  grid.innerHTML = ''; fbar.innerHTML = '';
+
+  function makeCgiCard(item) {
+    const card = document.createElement('div');
+    card.className = 'cgi-card';
+    let thumbHtml = item.youtube
+      ? `<img src="https://i.ytimg.com/vi/${item.youtube}/hqdefault.jpg" alt="${item.title}" loading="lazy"/><div class="yt-play-overlay"><div class="yt-play-btn">▶</div></div>`
+      : item.image ? `<img src="${item.image}" alt="${item.title}" loading="lazy"/>` : `<div class="cgi-thumb-placeholder">🎨</div>`;
+    const badge = item.youtube ? `<div class="media-badge">▶ Breakdown</div>` : '';
+    card.innerHTML = `<div class="cgi-thumb">${thumbHtml}${badge}</div><div class="cgi-body"><div class="cgi-cat">${item.category}</div><div class="cgi-title">${item.title}</div><p class="cgi-desc">${item.desc}</p><div class="tags-row" style="margin-top:10px;">${item.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
+    card.addEventListener('click', () => openLightbox(item));
+    return card;
+  }
+
+  function makeShaderCard(s) {
+    const cell = document.createElement('div');
+    cell.className = 'shader-cell';
+    let thumbHtml = '', badge = '';
+    if (s.video) {
+      const poster = s.poster ? ` poster="${s.poster}"` : '';
+      thumbHtml = `<video class="shader-img" src="${s.video}"${poster} autoplay loop muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+      badge = `<div class="media-badge">▶ Loop</div>`;
+    } else if (s.youtube) {
+      thumbHtml = `<img class="shader-img" src="https://i.ytimg.com/vi/${s.youtube}/hqdefault.jpg" alt="${s.title}" loading="lazy"/><div class="yt-play-overlay"><div class="yt-play-btn">▶</div></div>`;
+      badge = `<div class="media-badge">▶ Breakdown</div>`;
+    } else {
+      thumbHtml = `<div class="shader-img-placeholder">🎨</div>`;
+    }
+    cell.innerHTML = `<div class="shader-thumb">${thumbHtml}${badge}</div><div class="shader-body"><div class="shader-cell-label">${s.category}</div><div class="shader-cell-title">${s.title}</div><p class="shader-cell-desc">${s.desc}</p><div class="tags-row">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`;
+    cell.addEventListener('click', () => openLightbox({...s, image:''}));
+    return cell;
+  }
+
+  function buildSvGrid(items, makeCard, gridClass) {
+    grid.innerHTML = '';
+    grid.className = 'sv-grid ' + gridClass;
+    items.forEach(item => grid.appendChild(makeCard(item)));
+  }
+
+  function setupFilters(allItems, makeCard, gridClass, getCat) {
+    const cats = ['All', ...new Set(allItems.map(getCat))];
+    cats.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.className = 'filter-btn' + (i===0?' active':'');
+      b.textContent = c;
+      b.onclick = () => {
+        fbar.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        buildSvGrid(c==='All' ? allItems : allItems.filter(x=>getCat(x)===c), makeCard, gridClass);
+      };
+      fbar.appendChild(b);
+    });
+    buildSvGrid(allItems, makeCard, gridClass);
+  }
+
+  if (section === 'cgi') {
+    setupFilters(D.cgi, makeCgiCard, 'cgi-grid', i=>i.category);
+  } else if (section === 'shaders') {
+    setupFilters(D.shaders, makeShaderCard, 'shader-grid', s=>s.category);
+  }
+
+  sv.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  history.pushState({sv: section}, '', '#' + section + '-all');
+}
+
+function closeSectionView() {
+  document.getElementById('sectionView').classList.remove('open');
+  document.body.style.overflow = '';
+  history.back();
+}
+window.addEventListener('popstate', () => {
+  const sv = document.getElementById('sectionView');
+  if (sv.classList.contains('open')) { sv.classList.remove('open'); document.body.style.overflow = ''; }
+});
 
 /* ═══ FORM SUBMIT ════════════════════════════════════ */
 function submitForm(e) {
@@ -1732,52 +1874,80 @@ function renderAll() {
   });
   buildShaderGrid('All');
 
-  function buildShaderGrid(cat) {
-    const grid = document.getElementById('shaderGrid');
+  function buildShaderGrid(cat, targetGrid) {
+    const grid = targetGrid || document.getElementById('shaderGrid');
+    const isMain = !targetGrid;
     grid.innerHTML = '';
     const filtered = cat==='All' ? C.shaders : C.shaders.filter(s=>s.category===cat);
-    filtered.forEach((s, i) => {
+    const limit = isMain ? SV_LIMIT.shaders : Infinity;
+    filtered.slice(0, limit).forEach((s, i) => {
       const cell = document.createElement('div');
-      cell.className = 'shader-cell' + (s.featured && i===0 && cat==='All' ? ' span2' : '');
+      cell.className = 'shader-cell';
       cell.dataset.cat = s.category;
 
-      // Preview priority: video > youtube > image > webgl > placeholder
-      let mediaBadge = '';
+      // Build thumb content
+      let thumbHtml = '', badge = '';
       if (s.video) {
         const poster = s.poster ? ` poster="${s.poster}"` : '';
-        cell.innerHTML = `<video class="preview-video" src="${s.video}"${poster}
-          autoplay loop muted playsinline preload="metadata"></video>`;
-        mediaBadge = `<div class="media-badge">▶ Loop</div>`;
+        thumbHtml = `<video class="shader-img" src="${s.video}"${poster} autoplay loop muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+        badge = `<div class="media-badge">▶ Loop</div>`;
       } else if (s.youtube) {
-        const thumb = `https://i.ytimg.com/vi/${s.youtube}/hqdefault.jpg`;
-        cell.innerHTML = `<img class="shader-img" src="${thumb}" alt="${s.title}" loading="lazy"/>
+        thumbHtml = `<img class="shader-img" src="https://i.ytimg.com/vi/${s.youtube}/hqdefault.jpg" alt="${s.title}" loading="lazy"/>
           <div class="yt-play-overlay"><div class="yt-play-btn">▶</div></div>`;
-        mediaBadge = `<div class="media-badge">▶ Breakdown</div>`;
-        cell.style.cursor = 'pointer';
-        cell.addEventListener('click', () => openLightbox({...s, image:''}));
+        badge = `<div class="media-badge">▶ Breakdown</div>`;
       } else if (s.preview && s.preview.startsWith('webgl:')) {
         const key = s.preview.replace('webgl:','');
         const cv = document.createElement('canvas');
-        cv.className = 'shader-canvas';
-        cv.style.width='100%'; cv.style.height='100%';
-        cell.appendChild(cv);
+        cv.style.cssText = 'width:100%;height:100%;display:block;';
+        const thumbDiv = document.createElement('div');
+        thumbDiv.className = 'shader-thumb';
+        thumbDiv.appendChild(cv);
+        thumbDiv.insertAdjacentHTML('beforeend', badge);
         if (SHADERS_GLSL[key]) { requestAnimationFrame(()=>makeWebGL(cv, SHADERS_GLSL[key])); }
+        cell.appendChild(thumbDiv);
+        cell.insertAdjacentHTML('beforeend', `<div class="shader-body">
+          <div class="shader-cell-label">${s.category}</div>
+          <div class="shader-cell-title">${s.title}</div>
+          <p class="shader-cell-desc">${s.desc}</p>
+          <div class="tags-row">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>`);
+        cell.addEventListener('click', () => openLightbox({...s, image:''}));
+        grid.appendChild(cell);
+        return;
       } else if (s.preview) {
-        cell.innerHTML = `<img class="shader-img" src="${s.preview}" alt="${s.title}" loading="lazy"/>`;
+        thumbHtml = `<img class="shader-img" src="${s.preview}" alt="${s.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"/>`;
       } else {
-        cell.innerHTML = `<div class="shader-img-placeholder">🎨</div>`;
+        thumbHtml = `<div class="shader-img-placeholder">🎨</div>`;
       }
 
-      cell.innerHTML += mediaBadge + `<div class="shader-overlay">
-        <div class="shader-cell-label">${s.category}</div>
-        <div class="shader-cell-title">${s.title}</div>
-        <div class="shader-cell-desc">${s.desc}</div>
-        <div class="tags-row">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      </div>`;
+      cell.innerHTML = `
+        <div class="shader-thumb">${thumbHtml}${badge}</div>
+        <div class="shader-body">
+          <div class="shader-cell-label">${s.category}</div>
+          <div class="shader-cell-title">${s.title}</div>
+          <p class="shader-cell-desc">${s.desc}</p>
+          <div class="tags-row">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>`;
+      cell.addEventListener('click', () => openLightbox({...s, image:''}));
       grid.appendChild(cell);
     });
   }
-  function filterShaders(cat) { buildShaderGrid(cat); }
+  function filterShaders(cat) {
+    buildShaderGrid(cat);
+    renderShaderViewAll(cat);
+  }
+  function renderShaderViewAll(cat) {
+    const existing = document.getElementById('shaderViewAllWrap');
+    if (existing) existing.remove();
+    const filtered = cat==='All' ? C.shaders : C.shaders.filter(s=>s.category===cat);
+    if (filtered.length <= SV_LIMIT.shaders) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'shaderViewAllWrap';
+    wrap.className = 'view-all-wrap';
+    wrap.innerHTML = `<button class="btn-view-all" onclick="openSectionView('shaders')">View All Shaders (${filtered.length}) →</button>`;
+    document.getElementById('shaderGrid').after(wrap);
+  }
+  renderShaderViewAll('All');
 
   /* ── Tools ── */
   const toolsEl = document.getElementById('toolsGrid');
@@ -1823,16 +1993,28 @@ function renderAll() {
     b.textContent = cat; b.dataset.cat = cat;
     b.addEventListener('click', () => {
       document.querySelectorAll('#cgiFilters .filter-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active'); buildCgi(cat);
+      b.classList.add('active'); buildCgi(cat); renderCgiViewAll(cat);
     });
     cgiFiltersEl.appendChild(b);
   });
   buildCgi('All');
+  renderCgiViewAll('All');
+  function renderCgiViewAll(cat) {
+    const existing = document.getElementById('cgiViewAllWrap');
+    if (existing) existing.remove();
+    const items = cat==='All' ? C.cgi : C.cgi.filter(c=>c.category===cat);
+    if (items.length <= SV_LIMIT.cgi) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'cgiViewAllWrap';
+    wrap.className = 'view-all-wrap';
+    wrap.innerHTML = `<button class="btn-view-all" onclick="openSectionView('cgi')">View All CGI (${items.length}) →</button>`;
+    document.getElementById('cgiGrid').after(wrap);
+  }
   function buildCgi(cat) {
     const grid = document.getElementById('cgiGrid');
     grid.innerHTML = '';
     const items = cat==='All' ? C.cgi : C.cgi.filter(c=>c.category===cat);
-    items.forEach(item => {
+    items.slice(0, SV_LIMIT.cgi).forEach(item => {
       const card = document.createElement('div');
       card.className = 'cgi-card reveal';
       revObs.observe(card);

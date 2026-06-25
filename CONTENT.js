@@ -58,6 +58,11 @@ const CONTENT = {
       preview: "webgl:toon",
       link: "",
       featured: true,
+      links: [
+        { label: "Unity Asset Store", url: "" },
+        { label: "Documentation",     url: "" },
+        { label: "GitHub",            url: "https://github.com/soumikam" },
+      ],
     },
     {
       id: "stencil",
