@@ -207,6 +207,7 @@ body::before {
 }
 .ctrl-btn:hover { color: var(--accent); border-color: var(--accent-glow); }
 .ctrl-btn.music-on { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.mob-cart-btn { display: none; }
 
 /* Persistent nav marketplace CTA */
 .nav-cta-btn {
@@ -981,6 +982,7 @@ textarea { resize: none; min-height: 110px; }
   .nav-links { display: none; }
   .nav-status { display: none; }
   .nav-cta-btn { display: none; }
+  .mob-cart-btn { display: flex; }
   .hamburger { display: flex; }
   .section { padding: 72px 0; }
   .section-title { font-size: 32px; margin-bottom: 32px; }
@@ -1076,13 +1078,14 @@ textarea { resize: none; min-height: 110px; }
       <li><a href="#experience">Experience</a></li>
       <li><a href="#stack">Stack</a></li>
       <li><a href="#blog">Blog</a></li>
-      <li><a href="#marketplace">Marketplace</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
       <div class="nav-status" id="navStatus"></div>
-      <!-- Persistent marketplace CTA -->
+      <!-- Persistent marketplace CTA (desktop) -->
       <a href="#marketplace" class="nav-cta-btn" title="Explore Marketplace">🛒 Marketplace</a>
+      <!-- Cart icon (mobile only) -->
+      <a href="#marketplace" class="ctrl-btn mob-cart-btn" title="Marketplace">🛒</a>
       <!-- Theme toggle -->
       <button class="ctrl-btn" id="themeBtn" onclick="cycleTheme()" title="Toggle theme">🌙</button>
       <!-- Music toggle -->
@@ -1262,6 +1265,7 @@ textarea { resize: none; min-height: 110px; }
         <a href="#tools">Tools</a>
         <a href="#cgi">CGI</a>
         <a href="#blog">Blog</a>
+        <a href="#marketplace">Marketplace</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
