@@ -22,7 +22,7 @@ const CONTENT = {
   /* ── HERO ─────────────────────────────────────────── */
   hero: {
     name: "Soumik Adhikary",
-    roles: ["Technical Artist", "Shader Developer", "Tool Builder", "CGI Artist"],
+    roles: ["Technical Artist", "Software Engineer", "Shader Developer", "Tool Builder", "CGI Artist"],
     tagline: "I build the invisible layer between artists and engineers.",
     sub: "URP shaders · Editor tooling · VFX pipelines · CGI renders",
     location: "Pune, India",
