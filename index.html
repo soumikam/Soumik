@@ -12,12 +12,12 @@
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"/>
 
 <title>Soumik Adhikary — Technical Artist</title>
-<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="SoumikPixels" />
-<link rel="manifest" href="site.webmanifest" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Soumik" />
+<link rel="manifest" href="/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 
@@ -27,9 +27,10 @@
    ════════════════════════════════════════════════════ */
 :root {
   /* shared */
-  --accent:      #c8ff57;   /* acid-lime — the signature colour */
-  --accent-dim:  rgba(200,255,87,0.12);
-  --accent-glow: rgba(200,255,87,0.25);
+  --accent:      #F5187C;   /* electric hot pink — high contrast pop */
+  --accent-dim:  rgba(245,24,124,0.12);
+  --accent-glow: rgba(245,24,124,0.30);
+  --accent-text: #fff;
   --accent2:     #ff8c42;
   --accent3:     #7eb8ff;
   --radius-sm:   6px;
@@ -44,15 +45,15 @@
 }
 
 [data-theme="dark"] {
-  --bg:          #0b0c0f;
-  --bg2:         #111318;
-  --surface:     #16181d;
-  --surface2:    #1c1f26;
-  --border:      rgba(255,255,255,0.07);
-  --border2:     rgba(255,255,255,0.12);
-  --text:        #e8eaf0;
-  --text2:       #9298a8;
-  --text3:       #5a6070;
+  --bg:          #0B0B0B;
+  --bg2:         #111111;
+  --surface:     #111111;
+  --surface2:    #1E1E1E;
+  --border:      rgba(255,255,255,0.08);
+  --border2:     rgba(255,255,255,0.14);
+  --text:        #FFFFFF;
+  --text2:       #888888;
+  --text3:       #555555;
   --invert-logo: 0;
 }
 [data-theme="light"] {
@@ -221,7 +222,7 @@ body::before {
   white-space: nowrap; flex-shrink: 0;
 }
 .nav-cta-btn:hover {
-  background: var(--accent); color: #000;
+  background: var(--accent); color: var(--accent-text);
   box-shadow: 0 4px 16px var(--accent-glow);
 }
 
@@ -377,7 +378,7 @@ body::before {
   letter-spacing: 0.01em;
 }
 .btn-accent {
-  background: var(--accent); color: #000;
+  background: var(--accent); color: var(--accent-text);
 }
 .btn-accent:hover { transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
 .btn-outline {
@@ -393,7 +394,7 @@ body::before {
   color: var(--accent);
 }
 .btn-marketplace:hover {
-  background: var(--accent); color: #000;
+  background: var(--accent); color: var(--accent-text);
   transform: translateY(-1px);
   box-shadow: 0 8px 24px var(--accent-glow);
 }
@@ -407,7 +408,7 @@ body::before {
 .btn-contact:hover {
   border-color: var(--accent);
   background: var(--accent);
-  color: #000;
+  color: var(--accent-text);
   transform: translateY(-1px);
   box-shadow: 0 8px 24px var(--accent-glow);
 }
@@ -465,7 +466,7 @@ body::before {
   cursor: pointer;
 }
 .filter-btn:hover { color: var(--text); border-color: var(--border2); }
-.filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.filter-btn.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
 
 /* ════ SHADER SECTION ════════════════════════════════ */
 .shader-grid {
@@ -832,7 +833,7 @@ body::before {
   font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 5px 12px; border-radius: 100px;
-  background: var(--accent); color: #000;
+  background: var(--accent); color: var(--accent-text);
   margin-bottom: 20px;
 }
 .market-card.featured-product {
