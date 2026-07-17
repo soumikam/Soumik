@@ -1,6 +1,6 @@
 {
-  "name": "SoumikPixels",
-  "short_name": "SoumikPixels",
+  "name": "soumik.pixels",
+  "short_name": "Soumik",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
