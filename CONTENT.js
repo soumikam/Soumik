@@ -467,7 +467,7 @@ const CONTENT = {
     {
       title: "UV Shell Colorizer",
       platform: "Blender Market",
-      price: "Free",            // "Free" or "$X.XX"
+      price: "$18.00",            // "Free" or "$X.XX"
       image: "",                // "assets/img/market/uvcolorizer.jpg"
       tags: ["Blender", "UV", "Addon"],
       desc: "Instant per-shell UV colorization for faster texture layout review. One-click operator, AddonPreferences, works on all Blender 3.x+ versions.",

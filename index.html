@@ -760,7 +760,7 @@ body::before {
 .lb-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* ════ STACK SECTION (Software · Languages · Skills) ═ */
-.stack-section { }
+
 .stack-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1915,7 +1915,7 @@ function renderAll() {
      <a href="#marketplace" class="btn btn-marketplace">🛒 Explore Marketplace</a>
      <a href="#contact" class="btn btn-contact">✦ Contact Me</a>
      <a href="${C.contact.resume||'#'}" class="btn btn-outline" target="_blank">↓ Resume</a>`;
-  document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} Soumik Adhikary · Technical Artist`;
+  document.getElementById('footerCopy').textContent = `© ${new Date().getFullYear()} Soumik Adhikary · soumik.pixels`;
 
   /* ── Shaders ── */
   const shaderCategories = ['All', ...new Set(C.shaders.map(s=>s.category))];
