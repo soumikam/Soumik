@@ -495,7 +495,7 @@ const CONTENT = {
       { label: "NeetCode",  icon: "nc",       url: "https://neetcode.io" },
       { label: "YouTube",   icon: "yt",       url: "https://www.youtube.com/@Soumik.Pixels" },
     ],
-    resume: "https://drive.google.com/file/d/18BIH6MyrN2LBV-1830wZs_MM23YMQKDl/view?usp=drive_link",
+    resume: "https://drive.google.com/file/d/1WA2jm63rX3ZyX_ysbWpp5viglnk6NtHc/view?usp=sharing",
   },
 
 };
